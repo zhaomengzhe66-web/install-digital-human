@@ -1,0 +1,15 @@
+{
+  "name": "install-digital-human-skill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Codex skill and examples for installing Manifest-driven VRM assistants into websites.",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate.mjs",
+    "demo": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

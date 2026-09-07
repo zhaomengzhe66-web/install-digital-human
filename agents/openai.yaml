@@ -1,0 +1,4 @@
+interface:
+  display_name: "安装网页数字人"
+  short_description: "将 Manifest 数字人安全接入网站并完成响应式自检"
+  default_prompt: "使用 $install-digital-human 将指定数字人接入当前网站左下角，并完成桌面端与 390px 自检。"

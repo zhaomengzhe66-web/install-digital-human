@@ -1,0 +1,56 @@
+{
+  "$schema": "https://zaomeng.ing/digital-human/schema/digital-human-manifest-1.1.schema.json",
+  "schemaVersion": "1.1",
+  "id": "vrm1-constraint-sample",
+  "version": "1.0.0",
+  "name": "VRM 1.0 兼容示范",
+  "runtime": { "minimumVersion": "0.3.0" },
+  "model": {
+    "url": "https://raw.githubusercontent.com/zhaomengzhe66-web/install-digital-human/main/examples/models/VRM1-Constraint-Sample.vrm",
+    "fallbackName": "Constraint Sample",
+    "calibration": { "poseDirection": 1, "cameraScale": 1, "cameraX": 0, "cameraY": 0, "turnAround": false },
+    "license": {
+      "source": "https://github.com/pixiv/three-vrm/tree/dev/packages/three-vrm/examples/models",
+      "author": "pixiv Inc.",
+      "confirmed": true,
+      "commercialUse": true,
+      "redistribution": true,
+      "credit": "VRM1 Constraint Sample · pixiv Inc."
+    }
+  },
+  "appearance": { "position": "bottom-left", "height": 350, "zIndex": 80 },
+  "startup": { "state": "idle", "pose": "standing", "gazeFollow": false, "openMenu": false },
+  "actions": [
+    { "id": "wave", "label": "挥手", "type": "procedural", "duration": 2.5 },
+    { "id": "cheer", "label": "欢呼", "type": "procedural", "duration": 3.2 },
+    { "id": "nod", "label": "点头", "type": "procedural", "duration": 1.8 },
+    { "id": "shake-head", "label": "摇头", "type": "procedural", "duration": 2 },
+    { "id": "bow", "label": "鞠躬", "type": "procedural", "duration": 2.6 }
+  ],
+  "expressions": [
+    { "id": "neutral", "label": "自然", "bindings": [{ "expression": "neutral", "weight": 1 }] },
+    { "id": "happy", "label": "开心", "bindings": [{ "expression": "happy", "weight": 1 }] },
+    { "id": "angry", "label": "生气", "bindings": [{ "expression": "angry", "weight": 0.88 }] },
+    { "id": "sad", "label": "难过", "bindings": [{ "expression": "sad", "weight": 0.9 }] },
+    { "id": "relaxed", "label": "放松", "bindings": [{ "expression": "relaxed", "weight": 0.78 }] },
+    { "id": "surprised", "label": "惊讶", "bindings": [{ "expression": "surprised", "weight": 0.94 }] }
+  ],
+  "menu": [
+    { "id": "gaze", "command": "setGazeFollow", "label": "视线跟随", "description": "眼神与头部跟随鼠标", "icon": "眼" },
+    { "id": "pose", "command": "togglePose", "label": "坐下来", "alternateLabel": "站起来", "description": "切换持续姿势", "icon": "坐" },
+    { "id": "wave", "command": "playAction", "value": "wave", "label": "挥手", "description": "抬起右手自然挥动", "icon": "挥" },
+    { "id": "cheer", "command": "playAction", "value": "cheer", "label": "欢呼", "description": "举手并轻跳", "icon": "乐" },
+    { "id": "nod", "command": "playAction", "value": "nod", "label": "点头", "description": "轻轻点头回应", "icon": "点" },
+    { "id": "shake-head", "command": "playAction", "value": "shake-head", "label": "摇头", "description": "左右摇头回应", "icon": "摇" },
+    { "id": "bow", "command": "playAction", "value": "bow", "label": "鞠躬", "description": "向前礼貌鞠躬", "icon": "礼" },
+    { "id": "neutral", "command": "setExpression", "value": "neutral", "label": "自然", "description": "恢复自然神情", "icon": "静" },
+    { "id": "happy", "command": "setExpression", "value": "happy", "label": "开心", "description": "显示开心表情", "icon": "笑" },
+    { "id": "angry", "command": "setExpression", "value": "angry", "label": "生气", "description": "显示生气表情", "icon": "怒" },
+    { "id": "sad", "command": "setExpression", "value": "sad", "label": "难过", "description": "显示难过表情", "icon": "忧" },
+    { "id": "relaxed", "command": "setExpression", "value": "relaxed", "label": "放松", "description": "显示放松表情", "icon": "松" },
+    { "id": "surprised", "command": "setExpression", "value": "surprised", "label": "惊讶", "description": "显示惊讶表情", "icon": "惊" },
+    { "id": "greeting", "command": "playGreeting", "label": "播放问候", "description": "本地语音与五元音口型", "icon": "声" },
+    { "id": "minimize", "command": "minimize", "label": "暂时收起", "description": "保留恢复入口", "icon": "—" }
+  ],
+  "permissions": { "autoplayAudio": false, "externalNavigation": false }
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Install Digital Human · VRM 示例</title>
+    <style>
+      :root {
+        color: #eef4f8;
+        background: #071017;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body { min-height: 100vh; margin: 0; overflow-x: hidden; }
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background:
+          radial-gradient(circle at 75% 24%, rgba(67, 149, 191, .24), transparent 31%),
+          radial-gradient(circle at 12% 80%, rgba(50, 105, 134, .18), transparent 26%),
+          linear-gradient(145deg, #071017, #0c1922 52%, #071017);
+        content: "";
+      }
+
+      body::after {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        opacity: .17;
+        background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: linear-gradient(to bottom, #000, transparent 88%);
+        content: "";
+      }
+
+      main {
+        width: min(1080px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: clamp(44px, 8vw, 96px) 0 190px;
+      }
+
+      .eyebrow { margin: 0 0 16px; color: #8fb5c9; font-size: .72rem; font-weight: 700; letter-spacing: .16em; }
+      h1 { max-width: 880px; margin: 0; font-size: clamp(3rem, 9vw, 7.8rem); font-weight: 510; letter-spacing: -.075em; line-height: .9; }
+      .lead { max-width: 690px; margin: 32px 0 0; color: #a9bcc7; font-size: clamp(1rem, 2vw, 1.22rem); line-height: 1.85; }
+      .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 38px; }
+      button, a.button {
+        min-height: 44px;
+        padding: 0 17px;
+        border: 1px solid rgba(204, 230, 243, .17);
+        border-radius: 999px;
+        background: rgba(232, 246, 255, .05);
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+        font-size: .82rem;
+        text-decoration: none;
+        transition: background .18s ease, border-color .18s ease, transform .18s ease;
+      }
+      button:hover, a.button:hover { border-color: rgba(134, 204, 237, .48); background: rgba(134, 204, 237, .1); }
+      button:active, a.button:active { transform: scale(.97); }
+      button[aria-pressed="true"] { border-color: #78b8d8; background: #d7effa; color: #0a1b24; }
+      button:focus-visible, a:focus-visible { outline: 2px solid #b5e5fb; outline-offset: 3px; }
+
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 82px; }
+      .card { min-height: 190px; padding: 24px; border: 1px solid rgba(204, 230, 243, .1); border-radius: 20px; background: rgba(8, 22, 30, .58); backdrop-filter: blur(16px); }
+      .card small { color: #76a5bc; font-size: .64rem; letter-spacing: .12em; }
+      .card h2 { margin: 18px 0 10px; font-size: 1.18rem; font-weight: 600; }
+      .card p { margin: 0; color: #9eb2bd; font-size: .82rem; line-height: 1.75; }
+      .status { margin-top: 18px; color: #9fcbe0; font-size: .76rem; }
+      .notice { margin-top: 46px; padding-top: 22px; border-top: 1px solid rgba(204, 230, 243, .1); color: #8299a5; font-size: .74rem; line-height: 1.7; }
+      code { color: #bde5f8; }
+
+      @media (max-width: 760px) {
+        main { width: min(100% - 28px, 1080px); padding-top: 34px; }
+        .grid { grid-template-columns: 1fr; margin-top: 52px; }
+        .card { min-height: 0; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      }
+    </style>
+    <script type="module" src="https://zaomeng.ing/digital-human/widget/digital-human.js"></script>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">OPEN AGENT SKILL / VRM WEB ASSISTANT</p>
+      <h1>把数字人放进任何网页。</h1>
+      <p class="lead">选择一个仓库内的真实模型，然后点击左下角角色。动作、表情、视线跟随、坐姿与问候都由 Manifest 描述，宿主页面不需要理解模型内部结构。</p>
+
+      <div class="toolbar" aria-label="切换示范模型">
+        <button type="button" data-manifest="./manifests/xia-yu-yao-earphones.json" aria-pressed="true">耳机角色 · VRM 0.x</button>
+        <button type="button" data-manifest="./manifests/vrm1-constraint-sample.json" aria-pressed="false">Constraint Sample · VRM 1.0</button>
+        <button type="button" data-open-panel>打开角色菜单</button>
+        <a class="button" href="../README.md">阅读使用说明</a>
+      </div>
+      <p class="status" data-status role="status" aria-live="polite">正在加载耳机角色……</p>
+
+      <section class="grid" aria-label="技能特性">
+        <article class="card">
+          <small>01 / MANIFEST</small>
+          <h2>行为与资源分离</h2>
+          <p>角色、动作、表情、菜单和启动行为都由 JSON 描述，可以独立发布、更新和回滚。</p>
+        </article>
+        <article class="card">
+          <small>02 / ADAPTIVE</small>
+          <h2>跨 VRM 版本适配</h2>
+          <p>同一套网页接口可以加载 VRM 0.x 与 1.0；方向和镜头差异通过模型校准解决。</p>
+        </article>
+        <article class="card">
+          <small>03 / VERIFIED</small>
+          <h2>交付不是复制代码</h2>
+          <p>技能要求完成构建、资源、CORS、键盘、桌面端与 390px 浏览器检查。</p>
+        </article>
+      </section>
+
+      <p class="notice">模型许可与 MIT 代码许可相互独立。耳机角色仅用于非商业示范，复制或部署前请阅读 <code>THIRD_PARTY_NOTICES.md</code> 以及 VRM 内嵌元数据。</p>
+    </main>
+
+    <digital-human-assistant
+      data-demo-assistant
+      manifest="./manifests/xia-yu-yao-earphones.json"
+      position="bottom-left"
+      height="350"
+      label="数字人示范"
+    ></digital-human-assistant>
+
+    <script type="module">
+      const assistant = document.querySelector('[data-demo-assistant]');
+      const status = document.querySelector('[data-status]');
+      const choices = [...document.querySelectorAll('[data-manifest]')];
+
+      const setStatus = (message) => {
+        if (status) status.textContent = message;
+      };
+
+      choices.forEach((button) => {
+        button.addEventListener('click', () => {
+          choices.forEach((choice) => choice.setAttribute('aria-pressed', String(choice === button)));
+          assistant?.setAttribute('manifest', button.dataset.manifest);
+          setStatus(`正在切换：${button.textContent.trim()}……`);
+        });
+      });
+
+      document.querySelector('[data-open-panel]')?.addEventListener('click', async () => {
+        await customElements.whenDefined('digital-human-assistant');
+        assistant?.open();
+      });
+
+      assistant?.addEventListener('digital-human-ready', () => setStatus('角色已准备好，点击左下角角色或“打开角色菜单”开始体验。'));
+      assistant?.addEventListener('digital-human-manifestload', (event) => setStatus(`Manifest 已加载：${event.detail.id}@${event.detail.version}`));
+      assistant?.addEventListener('digital-human-error', (event) => setStatus(`加载失败：${event.detail?.message || '请检查控制台'}`));
+    </script>
+  </body>
+</html>
