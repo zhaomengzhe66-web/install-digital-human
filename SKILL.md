@@ -27,7 +27,7 @@ Integrate one published, Manifest-driven digital human without taking ownership 
 2. Add the runtime module once:
 
    ```html
-   <script type="module" src="https://zaomeng.ing/digital-human/widget/digital-human.js"></script>
+   <script type="module" src="https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.1.0"></script>
    ```
 
 3. Add the assistant near the end of the body or root layout:

@@ -12,7 +12,7 @@
 
 - 音悦页面：<https://zaomeng.ing/sound/>
 - 数字人工作台：<https://zaomeng.ing/digital-human/workbench.html>
-- 嵌入运行时：<https://zaomeng.ing/digital-human/widget/digital-human.js>
+- 嵌入运行时：<https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.1.0>（带版本参数，避免旧缓存）
 
 ## 它解决什么问题
 
@@ -92,7 +92,7 @@ https://zaomeng.ing/digital-human/published/site-guide/latest.json
 ```html
 <script
   type="module"
-  src="https://zaomeng.ing/digital-human/widget/digital-human.js"
+  src="https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.1.0"
 ></script>
 
 <digital-human-assistant

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 — 2026-09-12
+
+- Document the `?v=1.1.0` runtime URL so hosts avoid stale cached widget bundles.
+- Record the mobile free-position clamp fix: dragging is bounded by the visible avatar, not the full menu shell.
+
 ## 1.1.0 — 2026-09-12
 
 - Document the corrected five-action / six-expression runtime set shared by the bundled VRM examples.
