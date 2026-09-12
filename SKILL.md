@@ -37,6 +37,7 @@ Integrate one published, Manifest-driven digital human without taking ownership 
      manifest="https://zaomeng.ing/digital-human/published/site-guide/latest.json"
      position="bottom-left"
      remember-state
+     remember-position
    ></digital-human-assistant>
    ```
 
@@ -53,7 +54,7 @@ Integrate one published, Manifest-driven digital human without taking ownership 
 
 6. Run the host build and serve its production output. Verify the runtime, Manifest, model, audio, and optional VRMA requests return 200 without CORS errors.
 7. Test desktop and 390px widths. The avatar must not block navigation or consent controls; the menu must remain in the viewport; Escape, minimize/restore, keyboard focus, and reduced motion must work.
-8. Confirm at least one action, expression, pose switch, gaze toggle, and any requested host-state integration. Check console errors before reporting completion.
+8. Confirm at least one action, expression, pose switch, gaze toggle, direct avatar drag, and any requested host-state integration. The runtime keeps gaze at the top of the menu and groups action/expression commands automatically. Check console errors before reporting completion.
 
 ## Version choice
 

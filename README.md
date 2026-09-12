@@ -30,14 +30,14 @@
 
 ## 当前能力
 
-- 默认固定在网页左下角，也可切换右下角；
+- 默认固定在网页左下角，也可切换右下角；按住数字人本体即可拖到视口内任意位置；
 - 视线与头部跟随指针；
-- 程序化动作与 VRMA 动作入口；
-- 可配置情绪表情及渐入、保持、渐出时长；
+- 五种跨 VRM 0.x / 1.0 校正后的程序化动作（挥手、欢呼、点头、摇头、鞠躬）与 VRMA 动作入口；
+- 六种可配置情绪表情（自然、开心、生气、难过、放松、惊讶）及渐入、保持、渐出时长；
 - 站立与持续坐姿；
 - 气泡、问候、口型和宿主页面命令；
 - `latest.json` 自动更新或固定版本 Manifest；
-- 菜单收起、恢复与本地状态记忆；
+- 菜单按“视线跟随 / 动作 / 表情 / 其他”分组，收起、恢复与本地状态记忆；
 - 静态 HTML、Astro、React/Vite、Next.js、Vue 接入说明；
 - 构建、资源、CORS、桌面端和 390px 浏览器自检。
 
@@ -99,8 +99,11 @@ https://zaomeng.ing/digital-human/published/site-guide/latest.json
   manifest="https://zaomeng.ing/digital-human/published/site-guide/latest.json"
   position="bottom-left"
   remember-state
+  remember-position
 ></digital-human-assistant>
 ```
+
+点击数字人会打开或关闭菜单；按住数字人本体并移动超过 6px 才会拖动，菜单中不再需要单独的拖动按钮。键盘聚焦数字人后可用方向键微调位置，`Shift` 加方向键会加大步进。
 
 组件公开方法包括：
 
@@ -114,7 +117,10 @@ assistant.playAction('wave');
 assistant.setExpression('happy');
 assistant.setPose('curled-sit');
 assistant.showBubble('一起听吧。');
+assistant.resetPosition();
 ```
+
+拖动完成和键盘调整都会触发 `digital-human-positionchange`，事件详情包含 `left`、`top` 与 `source`。设置 `movable="false"` 可为特定页面禁用拖动。
 
 更多框架放置说明见 [`references/frameworks.md`](references/frameworks.md)。
 
@@ -155,7 +161,7 @@ assistant.showBubble('一起听吧。');
 npm run demo
 ```
 
-然后打开 <http://127.0.0.1:4173/examples/>。示例页面允许在 VRM 0.x 和 VRM 1.0 之间切换，并直接打开动作、表情、视线与坐姿菜单。
+然后打开 <http://127.0.0.1:4173/examples/>。示例页面允许在 VRM 0.x 和 VRM 1.0 之间切换，并直接打开已校正的动作、表情、视线与坐姿菜单；按住角色本体即可移动。
 
 ## 验证
 
@@ -175,7 +181,7 @@ npm test
 
 1. Manifest、模型、动作和音频资源均返回 200；
 2. 至少触发一个动作和一个表情；
-3. 视线跟随、坐下/站起、Escape、收起/恢复正常；
+3. 视线跟随、动作/表情分组、坐下/站起、Escape、收起/恢复和直接拖动正常；
 4. 桌面端和 390px 无横向溢出，菜单不离开视口；
 5. 客户端路由来回切换后只有一个数字人实例；
 6. 控制台没有错误。

@@ -89,7 +89,7 @@
     <main>
       <p class="eyebrow">OPEN AGENT SKILL / VRM WEB ASSISTANT</p>
       <h1>把数字人放进任何网页。</h1>
-      <p class="lead">选择一个仓库内的真实模型，然后点击左下角角色。动作、表情、视线跟随、坐姿与问候都由 Manifest 描述，宿主页面不需要理解模型内部结构。</p>
+      <p class="lead">选择一个仓库内的真实模型，然后点击角色。视线跟随置顶，动作与表情分组，按住数字人本体即可移动；这些能力都由 Manifest 描述，宿主页面不需要理解模型内部结构。</p>
 
       <div class="toolbar" aria-label="切换示范模型">
         <button type="button" data-manifest="./manifests/xia-yu-yao-earphones.json" aria-pressed="true">耳机角色 · VRM 0.x</button>
@@ -126,6 +126,7 @@
       position="bottom-left"
       height="350"
       label="数字人示范"
+      remember-position
     ></digital-human-assistant>
 
     <script type="module">
@@ -150,7 +151,7 @@
         assistant?.open();
       });
 
-      assistant?.addEventListener('digital-human-ready', () => setStatus('角色已准备好，点击左下角角色或“打开角色菜单”开始体验。'));
+      assistant?.addEventListener('digital-human-ready', () => setStatus('角色已准备好，点击角色或“打开角色菜单”开始体验；按住角色即可移动。'));
       assistant?.addEventListener('digital-human-manifestload', (event) => setStatus(`Manifest 已加载：${event.detail.id}@${event.detail.version}`));
       assistant?.addEventListener('digital-human-error', (event) => setStatus(`加载失败：${event.detail?.message || '请检查控制台'}`));
     </script>
