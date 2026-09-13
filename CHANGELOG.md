@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3 — 2026-09-13
+
+- Keep the progressive behavior trail clear of the avatar when the control panel flips to the left edge, including the mobile layout.
+
 ## 1.3.2 — 2026-09-13
 
 - Keep the drag envelope compact enough for the visible character to reach the lower viewport while preserving an oversized transparent render surface.
