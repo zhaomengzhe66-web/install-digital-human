@@ -12,6 +12,7 @@ Integrate one published, Manifest-driven digital human without taking ownership 
 - Resolve the exact Manifest URL. Prefer `/digital-human/published/{id}/latest.json` for automatic updates or `/versions/{version}/manifest.json` for a pinned release.
 - Confirm the host repository root, build command, public base path, and framework.
 - Default to `bottom-left` unless the user specifies another position.
+- The floating avatar itself is free-positioned; the control panel starts at the avatar's upper-right, collapses action/expression groups by default, and flips near the viewport edge.
 
 ## Safety and licensing boundary
 
@@ -27,7 +28,7 @@ Integrate one published, Manifest-driven digital human without taking ownership 
 2. Add the runtime module once:
 
    ```html
-   <script type="module" src="https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.1.0"></script>
+   <script type="module" src="https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.3.0"></script>
    ```
 
 3. Add the assistant near the end of the body or root layout:
@@ -55,6 +56,8 @@ Integrate one published, Manifest-driven digital human without taking ownership 
 6. Run the host build and serve its production output. Verify the runtime, Manifest, model, audio, and optional VRMA requests return 200 without CORS errors.
 7. Test desktop and 390px widths. The avatar must not block navigation or consent controls; the menu must remain in the viewport; Escape, minimize/restore, keyboard focus, and reduced motion must work.
 8. Confirm at least one action, expression, pose switch, gaze toggle, direct avatar drag, and any requested host-state integration. The runtime keeps gaze at the top of the menu and groups action/expression commands automatically. Check console errors before reporting completion.
+
+The widget's action and expression commands appear as progressive steps in a behavior-flow trail beside the control panel. The trail is data-driven from the Manifest and reports queued, playing, or completed state; do not recreate a second host-side action menu.
 
 ## Version choice
 

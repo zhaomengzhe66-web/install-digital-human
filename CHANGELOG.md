@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.0 — 2026-09-13
+
+- Decouple the floating avatar render surface from the compact hit area so zoomed models are not clipped by a rectangular frame.
+- Keep gaze-follow and wheel zoom active through the host widget boundary.
+- Anchor the control panel to the avatar's upper-right by default, flip it near the viewport edge, and keep action/expression groups collapsed until requested.
+- Add a progressive behavior-flow trail to the right of the panel; selected actions and expressions report queued, playing, and completed states.
+- Refresh the published widget URL and example package version to `1.3.0`.
+
+## 1.2.0 — 2026-09-13
+
+- Restore gaze-follow pointer relay when the host owns avatar drag input.
+- Restore mouse-wheel camera zoom through the widget boundary.
+- Store free positions against the visible avatar bounds so the character can reach the viewport edges.
+- Remove the detached “控制” button and make 动作 / 表情 groups collapsible.
+
 ## 1.1.1 — 2026-09-12
 
 - Document the `?v=1.1.0` runtime URL so hosts avoid stale cached widget bundles.

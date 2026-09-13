@@ -12,7 +12,7 @@
 
 - 音悦页面：<https://zaomeng.ing/sound/>
 - 数字人工作台：<https://zaomeng.ing/digital-human/workbench.html>
-- 嵌入运行时：<https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.1.0>（带版本参数，避免旧缓存）
+- 嵌入运行时：<https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.3.0>（带版本参数，避免旧缓存）
 
 ## 它解决什么问题
 
@@ -30,14 +30,15 @@
 
 ## 当前能力
 
-- 默认固定在网页左下角，也可切换右下角；按住数字人本体即可拖到视口内任意位置；
+- 默认固定在网页左下角，也可切换右下角；按住数字人本体即可拖到视口内任意位置，靠近边缘时控制面板会自动避让；
+- 人物渲染层与命中层解耦，透明画布不会再把模型裁切在小矩形框里；滚轮支持连续缩放，视线跟随同时接收指针坐标；
 - 视线与头部跟随指针；
 - 五种跨 VRM 0.x / 1.0 校正后的程序化动作（挥手、欢呼、点头、摇头、鞠躬）与 VRMA 动作入口；
 - 六种可配置情绪表情（自然、开心、生气、难过、放松、惊讶）及渐入、保持、渐出时长；
 - 站立与持续坐姿；
 - 气泡、问候、口型和宿主页面命令；
 - `latest.json` 自动更新或固定版本 Manifest；
-- 菜单按“视线跟随 / 动作 / 表情 / 其他”分组，收起、恢复与本地状态记忆；
+- 菜单按“视线跟随 / 动作 / 表情 / 其他”分组，动作与表情默认收起；点击动作后，右侧会生成按顺序递进的行为流程卡；
 - 静态 HTML、Astro、React/Vite、Next.js、Vue 接入说明；
 - 构建、资源、CORS、桌面端和 390px 浏览器自检。
 
@@ -92,7 +93,7 @@ https://zaomeng.ing/digital-human/published/site-guide/latest.json
 ```html
 <script
   type="module"
-  src="https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.1.0"
+  src="https://zaomeng.ing/digital-human/widget/digital-human.js?v=1.3.0"
 ></script>
 
 <digital-human-assistant
@@ -103,7 +104,9 @@ https://zaomeng.ing/digital-human/published/site-guide/latest.json
 ></digital-human-assistant>
 ```
 
-点击数字人会打开或关闭菜单；按住数字人本体并移动超过 6px 才会拖动，菜单中不再需要单独的拖动按钮。键盘聚焦数字人后可用方向键微调位置，`Shift` 加方向键会加大步进。
+点击数字人会打开或关闭菜单；按住数字人本体并移动超过 6px 才会拖动，菜单中不再需要单独的拖动按钮。键盘聚焦数字人后可用方向键微调位置，`Shift` 加方向键会加大步进。人物区域上的鼠标滚轮可连续缩放（透明渲染面会随之放大，不再被小框裁切），视线跟随会继续接收拖动层转发的指针坐标。
+
+面板默认锚定在人物右上方并保持收起。打开后，动作、表情和其他分组仍按需展开；每次点击行为都会在面板右侧加入一个流程步骤，状态会从“排队”更新为“正在执行”再到“已完成”。人物靠近右侧边缘时，面板会翻转到人物左侧以保持可见。
 
 组件公开方法包括：
 
@@ -181,7 +184,7 @@ npm test
 
 1. Manifest、模型、动作和音频资源均返回 200；
 2. 至少触发一个动作和一个表情；
-3. 视线跟随、动作/表情分组、坐下/站起、Escape、收起/恢复和直接拖动正常；
+3. 视线跟随、动作/表情可折叠分组、滚轮缩放、坐下/站起、Escape、收起/恢复和直接拖动正常；
 4. 桌面端和 390px 无横向溢出，菜单不离开视口；
 5. 客户端路由来回切换后只有一个数字人实例；
 6. 控制台没有错误。
