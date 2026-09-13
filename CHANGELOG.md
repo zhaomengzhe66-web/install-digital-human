@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1 — 2026-09-13
+
+- Bump the runtime cache key after the free-render hit-area fix so browsers cannot reuse the pre-fix widget bundle.
+
 ## 1.3.0 — 2026-09-13
 
 - Decouple the floating avatar render surface from the compact hit area so zoomed models are not clipped by a rectangular frame.
