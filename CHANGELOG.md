@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.2 — 2026-09-13
+
+- Keep the drag envelope compact enough for the visible character to reach the lower viewport while preserving an oversized transparent render surface.
+
 ## 1.3.1 — 2026-09-13
 
 - Bump the runtime cache key after the free-render hit-area fix so browsers cannot reuse the pre-fix widget bundle.
